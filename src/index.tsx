@@ -1,7 +1,20 @@
-import { createRoot } from 'react-dom/client';
-import App from 'App';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Router from 'Router';
+import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { GlobalStyle } from '@styles/GlobalStyle';
 
-const container = document.getElementById('root');
-const root = createRoot(container as Element);
+const queryClient = new QueryClient();
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Router />
+      </BrowserRouter>
+    </QueryClientProvider>
+  </React.StrictMode>,
+);
