@@ -8,6 +8,34 @@
   />
   <link rel="icon" href="./favicon.ico" />
   <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet" />
+  <!-- 다크모드 시 새로고침 오류 수정 -->
+  <script type="text/javascript">
+    (function () {
+      function getInitialTheme() {
+        const isClient = typeof window !== 'undefined';
+        if (isClient) {
+          const persistedTheme = localStorage.getItem('theme');
+          if (persistedTheme) return persistedTheme;
+
+          const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+          if (systemTheme.matches) {
+            return 'dark';
+          } else return 'light';
+        }
+      }
+
+      const initialTheme = getInitialTheme();
+
+      document.documentElement.style.setProperty(
+        'background-color',
+        initialTheme === 'dark' ? '#1a1a1a' : '#f0f0f0',
+      );
+      document.documentElement.style.setProperty(
+        'color',
+        initialTheme === 'dark' ? '#f0f0f0' : '#1a1a1a',
+      );
+    })();
+  </script>
   <head>
     <title>DoLog</title>
   </head>
