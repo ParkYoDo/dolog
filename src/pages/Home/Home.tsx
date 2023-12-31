@@ -4,13 +4,12 @@ const Home = () => {
   return (
     <LayoutWrap
       style={{
-        border: ' 5px solid green',
-        overflowY: 'scroll',
-        padding: '20px',
+        overflowY: 'auto',
       }}
       justifyContent="flex-start"
       flexDirection="column"
     >
+      <div style={{ color: 'var(--red-6)' }}>FIRST</div>
       <div>HOME</div>
       <div>HOME</div>
       <div>HOME</div>
@@ -61,6 +60,29 @@ const Home = () => {
       <div>HOME</div>
       <div>HOME</div>
       <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div>HOME</div>
+      <div style={{ color: 'var(--volcano-4' }}>LAST</div>
     </LayoutWrap>
   );
 };
