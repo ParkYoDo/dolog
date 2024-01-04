@@ -1,6 +1,6 @@
-import { LayoutWrap } from '@styles/GlobalStyle';
-import { useState, useEffect } from 'react';
 import * as S from '@components/NavigationBar/NavigationBarStyle';
+import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
+import { useState, useEffect } from 'react';
 
 const NavigationBar = () => {
   const [theme, setTheme] = useState(localStorage.getItem('theme'));
@@ -24,10 +24,10 @@ const NavigationBar = () => {
   return (
     <S.NavigationBar theme={theme!}>
       <S.NavLink to="/">Blog</S.NavLink>
-      <S.Menus>
-        <div>검색 아이콘</div>
-        <S.Theme onClick={onToggleTheme} darkMode={theme === 'dark'}></S.Theme>
-      </S.Menus>
+      <S.NavMenus>
+        <ToggleSwitch prev="☀️" next="🌙" />
+        <div>로그인</div>
+      </S.NavMenus>
     </S.NavigationBar>
   );
 };
