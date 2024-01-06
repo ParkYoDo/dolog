@@ -25,7 +25,7 @@ const NavigationBar = () => {
     <S.NavigationBar theme={theme!}>
       <S.NavLink to="/">Blog</S.NavLink>
       <S.NavMenus>
-        <ToggleSwitch prev="☀️" next="🌙" />
+        <ToggleSwitch onClick={onToggleTheme} checked={theme === 'dark'} />
         <div>로그인</div>
       </S.NavMenus>
     </S.NavigationBar>

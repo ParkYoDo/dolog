@@ -1,53 +1,52 @@
 import styled from 'styled-components';
+import MoonIcon from '@components/Icons/moonIcon';
 
-export const Input = styled.input<{ prev: string }>`
+export const Input = styled.input`
   display: none;
-
+  //background
   &:checked + label {
     background-color: rgba(109, 104, 107);
   }
 
+  //left
   &:checked + label::before {
-    content: '☀️';
-    color: #fff;
-    left: 15px;
+    content: '';
+    left: 0;
+    width: fit-content;
   }
 
+  //circle
   &:checked + label::after {
-    left: calc(100% - 42.5px);
+    content: '🌕';
+    left: calc(100% - 36px);
   }
 `;
 
-export const Label = styled.label<{ next: string }>`
-  display: block;
+export const Label = styled.label`
   position: relative;
-  width: 100px;
-  height: 45px;
-  background-color: beige;
+  display: block;
+  background-color: white;
+  width: 72px;
+  height: 36px;
+  display: flex;
+  align-items: center;
   border-radius: 60px;
-  transition: background 0.4s;
+  cursor: pointer;
 
+  // right
   &::before {
-    content: '🌙';
-    font-size: 24px;
-    position: absolute;
-    left: 45px;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: all 0.4s;
-  }
-
-  &::after {
     content: '';
     position: absolute;
-    left: 2.5px;
     top: 50%;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    background-color: pink;
     transform: translateY(-50%);
-    box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s;
+    right: 0;
+  }
+
+  //circle
+  &::after {
+    content: '☀️';
+    position: absolute;
+    left: 4px;
+    transition: all 0.25s ease-in-out;
   }
 `;

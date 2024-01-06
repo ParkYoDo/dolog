@@ -1,15 +1,15 @@
 import * as S from '@components/ToggleSwitch/ToggleSwitchStyle';
 
 interface Iprops {
-  prev: string;
-  next: string;
+  onClick: () => void;
+  checked?: boolean;
 }
 
-const ToggleSwitch = ({ prev, next }: Iprops) => {
+const ToggleSwitch = (props: Iprops) => {
   return (
     <>
-      <S.Input type="checkbox" id="switch" prev={prev} />
-      <S.Label htmlFor="switch" next={next} />
+      <S.Input type="checkbox" id="switch" checked={props?.checked} />
+      <S.Label htmlFor="switch" onClick={props.onClick} />
     </>
   );
 };
