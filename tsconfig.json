@@ -23,7 +23,7 @@
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
       "@types/*": ["types/*"],
-      "@utils/*": ["utils/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"] // src 하위 모든 파일을 타입스크립트로 설정
