@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export const NavigationBar = styled.nav<{ theme: string }>`
   width: 100%;
-  height: 62px;
+  height: 60px;
   padding: 0 48px;
   display: flex;
   justify-content: space-between;
@@ -22,10 +22,17 @@ export const NavigationBar = styled.nav<{ theme: string }>`
 `;
 
 export const NavLink = styled(Link)`
-  letter-spacing: 24px;
+  letter-spacing: 36px;
+  overflow: hidden;
+  &::after {
+    content: '';
+    margin-left: -36px;
+  }
 `;
 
 export const NavMenus = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 12px;
 `;
