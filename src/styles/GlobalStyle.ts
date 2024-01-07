@@ -1,6 +1,7 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
 import { globalCssVariables } from './globalCssVariables';
 import { CSSProperties } from 'react';
+import { lightMode, darkMode } from '@styles/theme';
 
 export const GlobalStyle = createGlobalStyle`
     :root {
@@ -19,18 +20,29 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         height: 100%;
-        font-size: 62.5%;
+        font-size: 10px;
         font-family: 'Poor Story';
-        transition: color, background-color 0.25s ease-in-out;
+        ${lightMode}
+        transition: background 0.125s ease-in;
     }
 
+    @media (prefers-color-scheme: dark) {
+        body {
+            ${darkMode}
+        }
+   }
+
     body[data-theme='light'] {
-        color:#1a1a1a;
-        background-color: #f0f0f0;
+        ${lightMode}
     }
+
     body[data-theme='dark'] {
-        color: #f0f0f0;
-        background-color: #1a1a1a;
+        ${darkMode}
+    }
+
+    body {
+        color: var(--text-color);
+        background: var(--background-color);
     }
 
     a {
