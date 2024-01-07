@@ -18,7 +18,7 @@ export const Input = styled.input`
   //circle
   &:checked + label::after {
     content: '🌕';
-    left: calc(100% - 36px);
+    left: calc(100% - 30px);
   }
 `;
 
