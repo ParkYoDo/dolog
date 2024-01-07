@@ -1,28 +1,12 @@
 import * as S from '@components/NavigationBar/NavigationBarStyle';
 import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
-import { useState, useEffect } from 'react';
+import useTheme from '@hooks/useTheme';
 
 const NavigationBar = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('theme'));
-
-  const onToggleTheme = () => {
-    if (theme === 'dark') {
-      return setTheme('light');
-    }
-    if (theme === 'light') {
-      return setTheme('dark');
-    }
-  };
-
-  useEffect(() => {
-    if (theme) {
-      localStorage.setItem('theme', theme);
-      document.body.dataset.theme = theme;
-    }
-  }, [theme]);
+  const [theme, onToggleTheme] = useTheme();
 
   return (
-    <S.NavigationBar theme={theme!}>
+    <S.NavigationBar>
       <S.NavLink to="/">Blog</S.NavLink>
       <S.NavMenus>
         <ToggleSwitch onClick={onToggleTheme} checked={theme === 'dark'} />
