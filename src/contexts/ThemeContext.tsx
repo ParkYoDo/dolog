@@ -11,17 +11,16 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState('');
 
   useLayoutEffect(() => {
-    if (localStorage.getItem('theme')) {
-      setTheme(localStorage.getItem('theme')!);
-    }
+    const userTheme = localStorage.getItem('theme');
+    const systemDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    if (!localStorage.getItem('theme')) {
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? (document.body.dataset.theme = 'dark')
-        : (document.body.dataset.theme = 'light');
+    if (userTheme) {
+      return setTheme(userTheme);
     }
-
-    document.body.dataset.theme = theme;
+    if (!userTheme && systemDarkTheme) {
+      return setTheme('dark');
+    }
+    return setTheme('light');
   }, []);
 
   return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
