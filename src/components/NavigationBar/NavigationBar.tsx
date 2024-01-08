@@ -3,7 +3,7 @@ import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
 import useTheme from '@hooks/useTheme';
 
 const NavigationBar = () => {
-  const [theme, onToggleTheme] = useTheme();
+  const { theme, onToggleTheme } = useTheme();
 
   return (
     <S.NavigationBar>

@@ -11,11 +11,6 @@ const useTheme = () => {
     if (theme === 'light') {
       setTheme('dark');
     }
-    if (!theme) {
-      window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? setTheme('light')
-        : setTheme('dark');
-    }
   };
 
   useEffect(() => {
@@ -25,7 +20,7 @@ const useTheme = () => {
     }
   }, [theme]);
 
-  return [theme, onToggleTheme] as const;
+  return { theme, onToggleTheme };
 };
 
 export default useTheme;
