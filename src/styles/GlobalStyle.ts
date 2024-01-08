@@ -9,10 +9,34 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      &::-webkit-scrollbar {
+        width: 16px;
+        position: absolute;
       }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--scroll-thumb);
+        transition: var(--transition-default);
+        background-clip: padding-box;
+        border: 4px solid transparent;
+        border-radius: var(--rounded-sm);
+        &:hover {
+          background: var(--scroll-hover);
+          background-clip: padding-box;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        ::-webkit-scrollbar {
+          display: none;
+        }
+      }
+    }
 
     html, #root {
       height: 100%;
@@ -51,7 +75,20 @@ export const GlobalStyle = createGlobalStyle`
     }
 `;
 
-export const LayoutWrap = styled.div<CSSProperties>`
+export const LayoutWrap = styled.div<
+  Pick<
+    CSSProperties,
+    | 'width'
+    | 'height'
+    | 'padding'
+    | 'margin'
+    | 'display'
+    | 'flexDirection'
+    | 'justifyContent'
+    | 'alignItems'
+    | 'gap'
+  >
+>`
   width: ${props => props?.width || '100%'};
   height: ${props => props?.height || '100%'};
   padding: ${props => props?.padding || '0'};
