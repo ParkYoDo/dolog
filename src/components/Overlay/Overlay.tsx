@@ -1,11 +1,8 @@
 import * as S from '@components/Overlay/OverlayStyle';
+import { IChildren } from 'types/inteface';
 
-interface Iprops {
-  children: React.ReactNode;
-}
-
-const Overlay = (props: Iprops) => {
-  return <S.OverlayWrap>{props.children}</S.OverlayWrap>;
+const Overlay = ({ children }: IChildren) => {
+  return <S.OverlayWrap>{children}</S.OverlayWrap>;
 };
 
 export default Overlay;
