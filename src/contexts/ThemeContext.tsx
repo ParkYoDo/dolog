@@ -1,13 +1,15 @@
-import { ReactNode, createContext, useEffect, useLayoutEffect, useState } from 'react';
+import { ReactNode, createContext, useState, useLayoutEffect } from 'react';
+import { IChildren } from '@types/inteface';
 
 interface IThemeContext {
   theme: string;
   setTheme: (theme: string) => void;
 }
 
-export const ThemeContext = createContext<IThemeContext | undefined>(undefined);
+export const ThemeContext = createContext<Pick<IThemeContext, 'theme'> | null>(null);
+export const ThemeDispatchContext = createContext<Pick<IThemeContext, 'setTheme'> | null>(null);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }: IChildren) => {
   const [theme, setTheme] = useState('');
 
   useLayoutEffect(() => {
@@ -23,5 +25,9 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     return setTheme('light');
   }, []);
 
-  return <ThemeContext.Provider value={{ theme, setTheme }}>{children}</ThemeContext.Provider>;
+  return (
+    <ThemeDispatchContext.Provider value={{ setTheme }}>
+      <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
+    </ThemeDispatchContext.Provider>
+  );
 };

@@ -1,8 +1,9 @@
 import { useContext, useEffect, useLayoutEffect } from 'react';
-import { ThemeContext } from 'contexts/ThemeContext';
+import { ThemeContext, ThemeDispatchContext } from 'contexts/ThemeContext';
 
 const useTheme = () => {
-  const { theme, setTheme } = useContext(ThemeContext)!;
+  const { theme } = useContext(ThemeContext)!;
+  const { setTheme } = useContext(ThemeDispatchContext)!;
 
   const onToggleTheme = () => {
     if (theme === 'dark') {
