@@ -15,6 +15,7 @@ module.exports = {
     alias: {
       // 절대경로
       '@apis': path.resolve(__dirname, '../src/apis/'),
+      '@contexts': path.resolve(__dirname, '../src/contexts/'),
       '@components': path.resolve(__dirname, '../src/components/'),
       '@hooks': path.resolve(__dirname, '../src/hooks/'),
       '@pages': path.resolve(__dirname, '../src/pages/'),
