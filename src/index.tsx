@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalStyle } from '@styles/GlobalStyle';
 import { ThemeProvider } from 'contexts/ThemeContext';
+import { ModalProvider } from 'contexts/ModalContext';
 
 const queryClient = new QueryClient();
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
@@ -14,8 +15,10 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <ThemeProvider>
-          <GlobalStyle />
-          <Router />
+          <ModalProvider>
+            <GlobalStyle />
+            <Router />
+          </ModalProvider>
         </ThemeProvider>
       </BrowserRouter>
     </QueryClientProvider>

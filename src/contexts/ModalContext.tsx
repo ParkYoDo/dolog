@@ -1,15 +1,20 @@
 import { createContext, ReactNode, useState } from 'react';
+import { IChildren } from '@types/inteface';
 
 interface IModalContext {
   modal: ReactNode[];
   setModal: (modal: ReactNode[]) => void;
 }
 
-export const ModalContext = createContext<IModalContext | undefined>(undefined);
-export const ModalActionContext = createContext({ open, close });
+export const ModalContext = createContext<Pick<IModalContext, 'modal'> | null>(null);
+export const ModalDispatchContext = createContext<Pick<IModalContext, 'setModal'> | null>(null);
 
-export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [modal, setModal] = useState<ReactNode | undefined>(undefined);
+export const ModalProvider = ({ children }: IChildren) => {
+  const [modal, setModal] = useState<ReactNode[]>([]);
 
-  return <ModalContext.Provider value={{ modal, setModal }}>{children}</ModalContext.Provider>;
+  return (
+    <ModalDispatchContext.Provider value={{ setModal }}>
+      <ModalContext.Provider value={{ modal }}>{children}</ModalContext.Provider>
+    </ModalDispatchContext.Provider>
+  );
 };
