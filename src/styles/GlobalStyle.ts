@@ -100,3 +100,25 @@ export const LayoutWrap = styled.div<
   gap: ${props => props?.gap};
   font-size: 24px;
 `;
+
+export const IconButton = styled.button`
+  width: var(--button-sm);
+  height: var(--button-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--rounded-sm);
+  background-color: transparent;
+  border: unset;
+  cursor: pointer;
+
+  svg {
+    filter: var(--svg-gray);
+  }
+  &:is(:hover, :active) {
+    background: #4d545f;
+    svg {
+      filter: var(--svg-white);
+    }
+  }
+`;
