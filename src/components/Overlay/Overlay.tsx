@@ -1,5 +1,5 @@
 import * as S from '@components/Overlay/OverlayStyle';
-import { IChildren } from 'types/inteface';
+import { IChildren } from 'type/interface';
 
 const Overlay = ({ children }: IChildren) => {
   return <S.OverlayWrap>{children}</S.OverlayWrap>;

@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useLayoutEffect } from 'react';
-import { IChildren } from '@types/inteface';
+import { IChildren } from 'type/interface';
 
 interface IThemeContext {
   theme: string;
@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children }: IChildren) => {
 
   return (
     <ThemeDispatchContext.Provider value={{ setTheme }}>
-      <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
+      <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
     </ThemeDispatchContext.Provider>
   );
 };
