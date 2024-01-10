@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
-import Overlay from '@components/Overlay/Overlay';
-import { LayoutWrap } from '@styles/GlobalStyle';
 import * as S from '@components/Modal/ModalStyle';
-import ModalPortal from '@components/Modal/ModalPortal';
+import Overlay from '@components/Overlay/Overlay';
+import XmarkIcon from '@components/Svg/XmarkIcon';
+import useModal from '@hooks/useModal';
+import { IconButton } from '@styles/GlobalStyle';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 interface IProps {
   width?: string;
@@ -13,21 +14,46 @@ interface IProps {
 }
 
 const Modal = (props: IProps) => {
+  const [mount, setMount] = useState(false);
+
+  const { onCloseModal } = useModal();
+
+  const onkeydown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      onCloseModal();
+    }
+  };
+
+  // 외부 스크롤 방지
+  useEffect(() => {
+    setMount(true);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      setMount(false);
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
   return (
-    <ModalPortal>
-      <Overlay>
-        <LayoutWrap
-          width={props.width || 'fit-content'}
-          height={props.height || 'fit-content'}
-          flexDirection="column"
-          style={{ border: '1px solid red' }}
-        >
-          <S.Header>{props.title}</S.Header>
-          <S.Body>{props.content}</S.Body>
-          {!!props?.buttons && <S.Footer></S.Footer>}
-        </LayoutWrap>
-      </Overlay>
-    </ModalPortal>
+    <Overlay>
+      <S.ModalLayout
+        width={props.width || '500px'}
+        height={props.height || 'fit-content'}
+        mount={mount}
+      >
+        <S.Header>
+          {props.title}
+          <IconButton onClick={onCloseModal}>
+            <XmarkIcon />
+          </IconButton>
+        </S.Header>
+
+        <S.Body>{props.content}</S.Body>
+
+        {!!props?.buttons && <S.Footer></S.Footer>}
+      </S.ModalLayout>
+    </Overlay>
   );
 };
 

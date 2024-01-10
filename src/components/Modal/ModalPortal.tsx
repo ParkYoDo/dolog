@@ -1,9 +1,10 @@
+import useModal from '@hooks/useModal';
 import { createPortal } from 'react-dom';
-import { IChildren } from '../../types/inteface';
 
-const ModalPortal = ({ children }: IChildren) => {
-  const modal = document.getElementById('portal-modal') as HTMLElement;
-  return createPortal(children, modal);
+const ModalPortal = () => {
+  const { modal } = useModal();
+  const modalPortal = document.getElementById('portal-modal')!;
+  return createPortal(modal, modalPortal);
 };
 
 export default ModalPortal;

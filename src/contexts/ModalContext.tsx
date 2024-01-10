@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react';
-import { IChildren } from '@types/inteface';
+import { IChildren } from 'type/interface';
 
 interface IModalContext {
   modal: ReactNode[];
