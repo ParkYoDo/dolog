@@ -122,3 +122,28 @@ export const IconButton = styled.button`
     }
   }
 `;
+
+export const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+`;
+
+export const Button = styled.button`
+  width: fit-content;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--modal-header-color);
+  color: var(--text-color);
+  border: none;
+  cursor: pointer;
+`;
