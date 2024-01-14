@@ -14,23 +14,13 @@ interface IProps {
 }
 
 const Modal = (props: IProps) => {
-  const [mount, setMount] = useState(false);
-
   const { onCloseModal } = useModal();
-
-  const onkeydown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Escape') {
-      onCloseModal();
-    }
-  };
 
   // 외부 스크롤 방지
   useEffect(() => {
-    setMount(true);
     document.body.style.overflow = 'hidden';
 
     return () => {
-      setMount(false);
       document.body.style.overflow = 'unset';
     };
   }, []);
@@ -38,23 +28,29 @@ const Modal = (props: IProps) => {
   return (
     <Overlay>
       <S.ModalLayout
-        width={props.width || '500px'}
+        width={props.width || '480px'}
         height={props.height || 'fit-content'}
-        mount={mount}
+        onKeyDown={e => {
+          if (e.key === 'Escape') onCloseModal();
+        }}
       >
         <S.Header>
           {props.title}
-          <IconButton onClick={onCloseModal}>
+          <S.ModalCloseBtn onClick={onCloseModal}>
             <XmarkIcon />
-          </IconButton>
+          </S.ModalCloseBtn>
         </S.Header>
 
         <S.Body>{props.content}</S.Body>
 
-        {!!props?.buttons && <S.Footer></S.Footer>}
+        {!!props?.buttons?.length && (
+          <S.Footer>{props?.buttons?.map((button: ReactNode) => button)}</S.Footer>
+        )}
       </S.ModalLayout>
     </Overlay>
   );
 };
+
+// Modal.Footer = <S.Footer>{props.asd}</S.Footer>;
 
 export default Modal;

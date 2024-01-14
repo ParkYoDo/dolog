@@ -1,35 +1,15 @@
-import { LayoutWrap } from '@styles/GlobalStyle';
-import styled, { keyframes } from 'styled-components';
+import { IconButton, LayoutWrap } from '@styles/GlobalStyle';
+import styled from 'styled-components';
 
-const UpModal = keyframes`
-  from {
-    scale: 0.9;
-    opacity: 0;
-  } 
-  to  {
-    scale: 1;
-    opacity: 1;
-  }
-`;
-
-const DownModal = keyframes`
-  from {
-    scale: 1;
-    opacity: 1;
-  } 
-  to {
-    scale: 0.9;
-    opacity: 0;
-  }
-`;
-
-export const ModalLayout = styled(LayoutWrap)<{ mount: boolean }>`
+export const ModalLayout = styled(LayoutWrap)`
   display: flex;
   flex-direction: column;
-  color: var(--text-color);
-  animation: ${({ mount }) => (mount ? UpModal : DownModal)} 0.25s ease-in-out;
-  animation-fill-mode: forwards;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--modal-body-color);
 `;
+
+export const ModalCloseBtn = styled(IconButton)``;
 
 export const Header = styled.header`
   width: 100%;
@@ -39,22 +19,27 @@ export const Header = styled.header`
   align-items: center;
   background-color: var(--modal-header-color);
   position: relative;
-  border-radius: 12px 12px 0 0;
 
-  > button {
+  ${ModalCloseBtn} {
     position: absolute;
     right: 0;
   }
 `;
 
-export const Body = styled.body`
+export const Body = styled.div`
   width: 100%;
-  min-height: 300px;
-  background-color: var(--modal-body-color);
-  border-radius: 0 0 12px 12px;
+  padding: 24px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: auto;
 `;
 
-export const Footer = styled.footer``;
+export const Footer = styled.footer`
+  padding: 0 24px 24px 24px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+`;
