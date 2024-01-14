@@ -3,7 +3,10 @@ export const lightMode = `
   --background-color: #f0f0f0;
   --border-color: 1px solid #1a1a1a;
   --navigation-color: #d4d4d4;
+  --modal-header-color: #d4d4d4;
+  --modal-body-color: #f0f0f0;
 `;
+
 export const darkMode = `
   --text-color: #f0f0f0;
   --background-color: #1c1e22;
