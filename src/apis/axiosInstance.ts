@@ -1,19 +1,11 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
-export const axiosInstance = axios.create({
-  baseURL: '/',
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:8080/',
   headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-    accept: 'application/json,',
-    withCredentials: true,
+    'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
-export const blogApi = {
-  get: (url: string) => axiosInstance.get(url),
-  post: (url: string, data?: any, headers?: any) => axiosInstance.post(url, data, headers),
-  put: (url: string, data?: any) => axiosInstance.put(url, data),
-  delete: (url: string, data?: any) => axiosInstance.delete(url, { data: data }),
-  patch: (url: string, data?: any, config?: AxiosRequestConfig) =>
-    axiosInstance.patch(url, data, config),
-};
+export default axiosInstance;
