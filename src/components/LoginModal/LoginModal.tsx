@@ -2,6 +2,7 @@ import Modal from '@components/Modal/Modal';
 import useAuth from '@hooks/useAuth';
 import useModal from '@hooks/useModal';
 import { Button, Form, Input, LayoutWrap } from '@styles/GlobalStyle';
+import axios from 'axios';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 interface IInput {
@@ -11,7 +12,7 @@ interface IInput {
 
 const LoginModal = () => {
   const { onCloseModal } = useModal();
-  const { signUp } = useAuth();
+  const { signIn, signUp } = useAuth();
 
   const {
     register,
@@ -25,6 +26,10 @@ const LoginModal = () => {
   });
 
   const onSubmit: SubmitHandler<IInput> = data => {
+    signIn(data);
+  };
+
+  const onSignUp: SubmitHandler<IInput> = data => {
     signUp(data);
   };
 
@@ -54,6 +59,7 @@ const LoginModal = () => {
 
   const buttons = [
     <Button onClick={handleSubmit(onSubmit)}>Confirm</Button>,
+    <Button onClick={handleSubmit(onSignUp)}>onSignUp</Button>,
     <Button onClick={onCloseModal}>Cancel</Button>,
   ];
 

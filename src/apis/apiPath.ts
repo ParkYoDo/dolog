@@ -5,7 +5,7 @@ const PATH = {
 
   AUTHENTICATION: {
     SIGNUP: '/auth/signup',
-    SIGNIN: '/auth/sign/in',
+    SIGNIN: '/auth/signin',
     SIGN: {
       SIGNOFF: '/auth/signOff',
       SIGNOUT: '/auth/sign/out',
