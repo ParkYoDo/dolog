@@ -7,3 +7,5 @@ export interface IAuth {
 export interface IAuthLogin extends Pick<IAuth, 'id' | 'password'> {}
 
 export interface IAuthSignUp extends IAuth {}
+
+export interface IAuthUser extends Pick<IAuth, 'id' | 'name'> {}
