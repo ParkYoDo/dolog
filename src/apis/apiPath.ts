@@ -5,12 +5,10 @@ const PATH = {
 
   AUTHENTICATION: {
     SIGNUP: '/auth/signup',
+    SIGNOFF: '/auth/signoff',
     SIGNIN: '/auth/signin',
+    SIGNOUT: '/auth/signout',
     SILENT_REFRESH: '/auth/silentRefresh',
-    SIGN: {
-      SIGNOFF: '/auth/signOff',
-      SIGNOUT: '/auth/sign/out',
-    },
 
     USER: {
       FIND: {
