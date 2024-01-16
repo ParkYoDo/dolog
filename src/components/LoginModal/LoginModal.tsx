@@ -1,5 +1,5 @@
 import Modal from '@components/Modal/Modal';
-import useAuth from '@hooks/useAuth';
+import useAuth from '@apis/reactQuery/authApi';
 import useModal from '@hooks/useModal';
 import { Button, Form, Input } from '@styles/GlobalStyle';
 import { IAuthLogin } from '@type/authInterface';

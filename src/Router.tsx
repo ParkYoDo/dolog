@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from '@components/Layout/Layout';
 import Home from '@pages/Home/Home';
 import { useEffect } from 'react';
-import useAuth from '@hooks/useAuth';
+import useAuth from '@apis/reactQuery/authApi';
 
 const Router = () => {
   const { silentRefresh } = useAuth();
