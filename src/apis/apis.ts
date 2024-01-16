@@ -11,4 +11,8 @@ export const authApi = {
     const res = await apis.post(PATH.AUTHENTICATION.SIGNIN, data);
     return res.data;
   },
+  silentRefresh: async () => {
+    const res = await apis.post(PATH.AUTHENTICATION.SILENT_REFRESH);
+    return res.data;
+  },
 };

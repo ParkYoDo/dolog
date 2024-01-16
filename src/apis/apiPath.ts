@@ -6,6 +6,7 @@ const PATH = {
   AUTHENTICATION: {
     SIGNUP: '/auth/signup',
     SIGNIN: '/auth/signin',
+    SILENT_REFRESH: '/auth/silentRefresh',
     SIGN: {
       SIGNOFF: '/auth/signOff',
       SIGNOUT: '/auth/sign/out',
