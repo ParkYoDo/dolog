@@ -1,10 +1,12 @@
 import { authApi } from '@apis/apis';
-import { IAuth } from '@type/interface';
+import { IAuthLogin, IAuthSignUp } from '@type/authInterface';
 import axios from 'axios';
 import { useMutation } from 'react-query';
 
+const JWT_EXPIRE_TIME = 24 * 3600 * 1000;
+
 const useAuth = () => {
-  const { mutate: signUp } = useMutation((data: IAuth) => authApi.signUp(data), {
+  const { mutate: signUp } = useMutation((data: IAuthSignUp) => authApi.signUp(data), {
     onSuccess: data => {
       console.log(data);
     },
@@ -13,7 +15,7 @@ const useAuth = () => {
     },
   });
 
-  const { mutate: signIn } = useMutation((data: IAuth) => authApi.signIn(data), {
+  const { mutate: signIn } = useMutation((data: IAuthLogin) => authApi.signIn(data), {
     onSuccess: data => onLoginSuccess(data),
     onError: error => {
       console.log(error);
@@ -30,7 +32,7 @@ const useAuth = () => {
   const onLoginSuccess = (data: any) => {
     const { accessToken } = data;
     axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    setTimeout(silentRefresh, 24 * 3600 * 1000 - 60000); // JWT 만료 1시간 전
+    setTimeout(silentRefresh, JWT_EXPIRE_TIME - 60000); // JWT 만료 1시간 전
   };
 
   return { signUp, signIn, silentRefresh };
