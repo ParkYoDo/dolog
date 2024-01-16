@@ -1,6 +1,7 @@
 import * as S from '@components/NavigationBar/NavigationBarStyle';
 import ToggleSwitch from '@components/ToggleSwitch/ToggleSwitch';
 import useTheme from '@hooks/useTheme';
+import SignUpModal from '@components/SignUpModal/SignUpModal';
 import LoginModal from '@components/LoginModal/LoginModal';
 import useModal from '@hooks/useModal';
 import { LayoutWrap } from '@styles/GlobalStyle';
@@ -14,6 +15,15 @@ const NavigationBar = () => {
       <S.NavLink to="/">Blog</S.NavLink>
       <S.NavMenus>
         <ToggleSwitch onClick={onToggleTheme} checked={theme === 'dark'} />
+        <LayoutWrap
+          width="fit-content"
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            onOpenModal(<SignUpModal />);
+          }}
+        >
+          Sign Up
+        </LayoutWrap>
         <LayoutWrap
           width="fit-content"
           style={{ cursor: 'pointer' }}

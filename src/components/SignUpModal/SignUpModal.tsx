@@ -2,32 +2,33 @@ import Modal from '@components/Modal/Modal';
 import useAuth from '@hooks/useAuth';
 import useModal from '@hooks/useModal';
 import { Button, Form, Input } from '@styles/GlobalStyle';
-import { IAuthLogin } from '@type/authInterface';
+import { IAuthSignUp } from '@type/authInterface';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-const LoginModal = () => {
+const SignUpModal = () => {
   const { onCloseModal } = useModal();
-  const { signIn } = useAuth();
+  const { signUp } = useAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAuthLogin>({
+  } = useForm<IAuthSignUp>({
     defaultValues: {
       id: '',
       password: '',
+      name: '',
     },
   });
 
-  const onSignIn: SubmitHandler<IAuthLogin> = data => {
-    signIn(data);
+  const onSignUp: SubmitHandler<IAuthSignUp> = data => {
+    signUp(data);
   };
 
   const content = (
     <Form
       onKeyDown={e => {
-        if (e.key === 'Enter') handleSubmit(onSignIn)();
+        if (e.key === 'Enter') handleSubmit(onSignUp)();
       }}
     >
       <Input
@@ -44,16 +45,23 @@ const LoginModal = () => {
           required: 'password를 입력하세요',
         })}
       />
-      {errors.id?.message || errors.password?.message}
+      <Input
+        type="name"
+        placeholder="Name"
+        {...register('name', {
+          required: 'name을 입력하세요',
+        })}
+      />
+      {errors.id?.message || errors.password?.message || errors.name?.message}
     </Form>
   );
 
   const buttons = [
-    <Button onClick={handleSubmit(onSignIn)}>SignIn</Button>,
+    <Button onClick={handleSubmit(onSignUp)}>SignUp</Button>,
     <Button onClick={onCloseModal}>Cancel</Button>,
   ];
 
-  return <Modal title="Login" content={content} buttons={buttons} />;
+  return <Modal title="Sign Up" content={content} buttons={buttons} />;
 };
 
-export default LoginModal;
+export default SignUpModal;
