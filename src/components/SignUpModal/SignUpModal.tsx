@@ -1,5 +1,5 @@
+import authApi from '@apis/reactQuery/authApi';
 import Modal from '@components/Modal/Modal';
-import useAuth from '@apis/reactQuery/authApi';
 import useModal from '@hooks/useModal';
 import { Button, Form, Input } from '@styles/GlobalStyle';
 import { IAuthSignUp } from '@type/authInterface';
@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 const SignUpModal = () => {
   const { onCloseModal } = useModal();
-  const { signUp } = useAuth();
+  const { signUp } = authApi();
 
   const {
     register,
