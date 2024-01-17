@@ -4,8 +4,7 @@ import Router from 'Router';
 import { BrowserRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { GlobalStyle } from '@styles/GlobalStyle';
-import { ThemeProvider } from 'contexts/ThemeContext';
-import { ModalProvider } from 'contexts/ModalContext';
+import ContextProvider from '@contexts/ContextProvider';
 import ModalPortal from '@components/Modal/ModalPortal';
 
 const queryClient = new QueryClient();
@@ -15,13 +14,11 @@ root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <ThemeProvider>
-          <ModalProvider>
-            <GlobalStyle />
-            <Router />
-            <ModalPortal />
-          </ModalProvider>
-        </ThemeProvider>
+        <ContextProvider>
+          <GlobalStyle />
+          <Router />
+          <ModalPortal />
+        </ContextProvider>
       </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>,

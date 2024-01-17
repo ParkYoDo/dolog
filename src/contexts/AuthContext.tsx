@@ -10,7 +10,7 @@ interface IAuthContext {
 export const AuthContext = createContext<Pick<IAuthContext, 'auth'> | null>(null);
 export const AuthDispatchContext = createContext<Pick<IAuthContext, 'setAuth'> | null>(null);
 
-export const ModalProvider = ({ children }: IChildren) => {
+export const AuthProvider = ({ children }: IChildren) => {
   const [auth, setAuth] = useState<IAuthUser>({ id: '', name: '' });
 
   return (
