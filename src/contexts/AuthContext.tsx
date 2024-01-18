@@ -11,7 +11,7 @@ export const AuthContext = createContext<Pick<IAuthContext, 'auth'> | null>(null
 export const AuthDispatchContext = createContext<Pick<IAuthContext, 'setAuth'> | null>(null);
 
 export const AuthProvider = ({ children }: IChildren) => {
-  const [auth, setAuth] = useState<IAuthUser>({ id: '', name: '' });
+  const [auth, setAuth] = useState<IAuthUser>({ uuid: '' });
 
   return (
     <AuthDispatchContext.Provider value={{ setAuth }}>

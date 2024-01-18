@@ -4,10 +4,13 @@ import { Button, Form, Input } from '@styles/GlobalStyle';
 import { IAuthLogin } from '@type/authInterface';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import authApi from '@apis/reactQuery/authApi';
+import useAuth from '@hooks/useAuth';
+import { useEffect } from 'react';
 
 const LoginModal = () => {
   const { onCloseModal } = useModal();
   const { signIn } = authApi();
+  const { auth, onLogin } = useAuth();
 
   const {
     register,
@@ -20,8 +23,16 @@ const LoginModal = () => {
     },
   });
 
-  const onSignIn: SubmitHandler<IAuthLogin> = data => {
-    signIn(data);
+  const onSignIn: SubmitHandler<IAuthLogin> = input => {
+    signIn.mutate(input, {
+      onSuccess: async data => {
+        onLogin({ uuid: data.uuid });
+        onCloseModal();
+      },
+      onError: error => {
+        console.log(error);
+      },
+    });
   };
 
   const content = (

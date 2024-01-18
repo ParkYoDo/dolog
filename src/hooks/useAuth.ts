@@ -6,12 +6,12 @@ const useAuth = () => {
   const { auth } = useContext(AuthContext)!;
   const { setAuth } = useContext(AuthDispatchContext)!;
 
-  const onLogin = (auth: IAuthUser) => {
-    return setAuth(auth);
+  const onLogin = (newAuth: IAuthUser) => {
+    setAuth(newAuth);
   };
 
   const onLogout = () => {
-    return setAuth({ id: '', name: '' });
+    return setAuth({ uuid: '' });
   };
 
   return { auth, onLogin, onLogout };

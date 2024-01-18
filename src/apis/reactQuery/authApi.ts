@@ -15,7 +15,7 @@ const authApi = () => {
     },
   });
 
-  const { mutate: signIn } = useMutation((data: IAuthLogin) => auth.signIn(data), {
+  const signIn = useMutation((data: IAuthLogin) => auth.signIn(data), {
     onSuccess: data => onLoginSuccess(data),
     onError: error => {
       console.log(error);
@@ -32,7 +32,6 @@ const authApi = () => {
   const onLoginSuccess = async (data: any) => {
     const { accessToken } = data;
     axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    // axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
 
     setTimeout(silentRefresh, JWT_EXPIRE_TIME - 60000); // JWT 만료 1시간 전
   };
