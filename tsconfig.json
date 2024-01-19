@@ -18,12 +18,12 @@
     "baseUrl": "src",
     "paths": {
       "@apis/*": ["apis/*"],
-      "@contexts/*": ["contexts/*"],
       "@components/*": ["components/*"],
+      "@contexts/*": ["contexts/*"],
       "@hooks/*": ["hooks/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "@type/*": ["type/*"],
+      "@models/*": ["models/*"],
       "@utils/*": ["utils/*"]
     }
   },

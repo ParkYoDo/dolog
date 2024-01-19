@@ -1,5 +1,5 @@
-import { useContext, useEffect, useLayoutEffect } from 'react';
-import { ThemeContext, ThemeDispatchContext } from 'contexts/ThemeContext';
+import { ThemeContext, ThemeDispatchContext } from '@contexts/ThemeContext';
+import { useContext, useEffect } from 'react';
 
 const useTheme = () => {
   const { theme } = useContext(ThemeContext)!;

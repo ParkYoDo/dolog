@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useLayoutEffect } from 'react';
-import { IChildren } from 'type/interface';
+import { IChildren } from '@models/interface';
 
 interface IThemeContext {
   theme: string;

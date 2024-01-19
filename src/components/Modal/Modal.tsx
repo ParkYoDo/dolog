@@ -2,8 +2,7 @@ import * as S from '@components/Modal/ModalStyle';
 import Overlay from '@components/Overlay/Overlay';
 import XmarkIcon from '@components/Svg/XmarkIcon';
 import useModal from '@hooks/useModal';
-import { IconButton } from '@styles/GlobalStyle';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 
 interface IProps {
   width?: string;

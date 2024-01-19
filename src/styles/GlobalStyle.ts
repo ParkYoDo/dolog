@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle, css } from 'styled-components';
-import { globalCssVariables } from './globalCssVariables';
+import { globalCssVariables } from '@styles/globalCssVariables';
 import { CSSProperties } from 'react';
 import { lightMode, darkMode } from '@styles/theme';
 

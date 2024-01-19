@@ -1,6 +1,6 @@
 import PATH from '@apis/apiPath';
 import axiosInstance from '@apis/axiosInstance';
-import { IAuthLogin, IAuthSignUp } from '@type/authInterface';
+import { IAuthLogin, IAuthSignUp } from '@models/authInterface';
 import { AxiosRequestConfig } from 'axios';
 
 const api = {

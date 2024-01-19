@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import MoonIcon from '@components/Icons/moonIcon';
 
 export const Input = styled.input`
   display: none;

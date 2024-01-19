@@ -1,7 +1,7 @@
-import { IChildren } from '@type/interface';
-import { ThemeProvider } from './ThemeContext';
-import { ModalProvider } from './ModalContext';
-import { AuthProvider } from './AuthContext';
+import { AuthProvider } from '@contexts/AuthContext';
+import { ModalProvider } from '@contexts/ModalContext';
+import { ThemeProvider } from '@contexts/ThemeContext';
+import { IChildren } from '@models/interface';
 
 const ContextProvider = ({ children }: IChildren) => {
   return (

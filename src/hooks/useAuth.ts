@@ -1,5 +1,5 @@
 import { AuthContext, AuthDispatchContext } from '@contexts/AuthContext';
-import { IAuthUser } from '@type/authInterface';
+import { IAuthUser } from '@models/authInterface';
 import { useContext } from 'react';
 
 const useAuth = () => {

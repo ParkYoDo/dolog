@@ -1,6 +1,6 @@
 import { auth } from '@apis/apis';
 import axiosInstance from '@apis/axiosInstance';
-import { IAuthLogin, IAuthSignUp } from '@type/authInterface';
+import { IAuthLogin, IAuthSignUp } from '@models/authInterface';
 import { useMutation } from 'react-query';
 
 const JWT_EXPIRE_TIME = 24 * 3600 * 1000;

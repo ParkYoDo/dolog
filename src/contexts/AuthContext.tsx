@@ -1,6 +1,6 @@
-import { IAuthUser } from '@type/authInterface';
+import { IAuthUser } from '@models/authInterface';
+import { IChildren } from '@models/interface';
 import { createContext, useState } from 'react';
-import { IChildren } from 'type/interface';
 
 interface IAuthContext {
   auth: IAuthUser;

@@ -2,7 +2,7 @@ import authApi from '@apis/reactQuery/authApi';
 import Modal from '@components/Modal/Modal';
 import useModal from '@hooks/useModal';
 import { Button, Form, Input } from '@styles/GlobalStyle';
-import { IAuthSignUp } from '@type/authInterface';
+import { IAuthSignUp } from '@models/authInterface';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 const SignUpModal = () => {
