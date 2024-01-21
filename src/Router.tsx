@@ -1,9 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
 import Layout from '@components/Layout/Layout';
 import Home from '@pages/Home/Home';
 import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import authApi from '@apis/reactQuery/authApi';
-import Write from '@pages/Home/Write';
+import Write from '@pages/Write/Write';
 
 const Router = () => {
   const { silentRefresh } = authApi();
