@@ -9,20 +9,10 @@ const PATH = {
     SIGNIN: '/auth/signin',
     SIGNOUT: '/auth/signout',
     SILENT_REFRESH: '/auth/silentRefresh',
+  },
 
-    USER: {
-      FIND: {
-        FIND_PASSWORD: '/auth/user/find/password',
-      },
-      ACTIVE: {
-        ACTIVE: '/auth/user/active',
-        ACTIVE_RESEND: '/auth/user/active/resend',
-        DEACTIVATE: '/auth/user/active',
-      },
-      INVITE: {
-        KINGDOM: '/auth/user/invite/workspace',
-      },
-    },
+  POST: {
+    PRESIGNED_URL: 'post/presigned-url',
   },
 
   MY: {

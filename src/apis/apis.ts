@@ -26,3 +26,14 @@ export const auth = {
     return res.data;
   },
 };
+
+export const post = {
+  getPresignedUrl: async (data: string) => {
+    const res = await api.get(`${PATH.POST.PRESIGNED_URL}?fileName=${data}`);
+    return res.data;
+  },
+  uploadS3: async ({ url, data }: any) => {
+    const res = await api.post(url, data);
+    return res.data;
+  },
+};
