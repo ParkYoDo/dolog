@@ -3,9 +3,8 @@ import Markdown from '@components/Markdown/Markdown';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import ImageIcon from '@components/Svg/ImageIcon';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import postApi from '@apis/reactQuery/postApi';
-import { api, apis } from '@apis/apis';
 import axios from 'axios';
 
 const Write = () => {
@@ -15,7 +14,8 @@ const Write = () => {
     watch,
     register,
     handleSubmit,
-
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<{ title: string; content: string }>({
     defaultValues: {
@@ -25,6 +25,9 @@ const Write = () => {
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const { ref, ...rest } = register('content');
+  const textAreaRef = useRef<any>(null);
 
   return (
     <LayoutWrap
@@ -45,19 +48,31 @@ const Write = () => {
             let file = e.target.files![0];
             let fileName = encodeURIComponent(file.name.replaceAll(' ', ''));
 
+            const url = URL.createObjectURL(file);
+            console.log(url);
+
+            setValue(
+              'content',
+              `${getValues('content')}\n![업로드중..](${url.replaceAll(':', '%3A')})`,
+            );
+
             getPresignedUrl.mutate(fileName, {
               onSuccess: async data => {
-                console.log(data);
-
-                await fetch(data, {
-                  method: 'PUT',
-                  body: file,
-                  headers: {
-                    'Content-type': file.type,
-                  },
-                });
-
-                console.log(`https://pyd-blog.s3.ap-northeast-2.amazonaws.com/${fileName}`);
+                try {
+                  const result = await axios.put(data, file, {
+                    headers: { 'Content-Type': file.type },
+                  });
+                  if (result.status === 200 && textAreaRef.current) {
+                    setValue(
+                      'content',
+                      `${getValues(
+                        'content',
+                      )}\n![](https://pyd-blog.s3.ap-northeast-2.amazonaws.com/images/${fileName})`,
+                    );
+                  }
+                } catch (error) {
+                  console.log(error);
+                }
               },
             });
           }}
@@ -76,9 +91,14 @@ const Write = () => {
         />
         <Textarea
           placeholder="내용을 입력해주세요!&#13;&#10;.&#13;&#10;[마크다운 에디터 사용법]&#13;&#10;1. 엔터를 두번 치면 줄바꿈이 됩니다.&#13;&#10;2. 코드의 처음과 끝에 ~~~을 입력하면 코드 창으로 바뀝니다.&#13;&#10;3. ~~~옆에 개발 언어를 입력하면 자동으로 하이라이팅 됩니다.&#13;&#10;.&#13;&#10;Ex)&#13;&#10;~~~javascript&#13;&#10;여기에 코드를 입력하세요.&#13;&#10;~~~"
-          {...register('content', {
-            required: 'content를 입력하세요',
-          })}
+          // {...register('content', {
+          //   required: 'content를 입력하세요',
+          // })}
+          {...rest}
+          ref={e => {
+            ref(e);
+            textAreaRef.current = e;
+          }}
         />
       </LayoutWrap>
 
