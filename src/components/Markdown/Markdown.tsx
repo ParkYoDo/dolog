@@ -50,7 +50,7 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
               return (
                 <img
                   style={{ maxWidth: '40vw' }}
-                  src={props.src?.replace('../../../../public/', '/')}
+                  src={props.src?.replaceAll('%3A', ':')}
                   alt="MarkdownRenderer__Image"
                 />
               );
