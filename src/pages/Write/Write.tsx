@@ -75,6 +75,7 @@ const Write = () => {
                 }
               },
             });
+            e.target.value = '';
           }}
         />
 
