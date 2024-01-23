@@ -48,13 +48,9 @@ const Write = () => {
             let file = e.target.files![0];
             let fileName = encodeURIComponent(file.name.replaceAll(' ', ''));
 
-            const url = URL.createObjectURL(file);
-            console.log(url);
+            const url = URL.createObjectURL(file).replaceAll(':', '%3A');
 
-            setValue(
-              'content',
-              `${getValues('content')}\n![업로드중..](${url.replaceAll(':', '%3A')})`,
-            );
+            setValue('content', `${getValues('content')}\n![업로드중..](${url})`);
 
             getPresignedUrl.mutate(fileName, {
               onSuccess: async data => {
@@ -65,9 +61,10 @@ const Write = () => {
                   if (result.status === 200 && textAreaRef.current) {
                     setValue(
                       'content',
-                      `${getValues(
-                        'content',
-                      )}\n![](https://pyd-blog.s3.ap-northeast-2.amazonaws.com/images/${fileName})`,
+                      getValues('content').replace(
+                        `![업로드중..](${url})`,
+                        `![](https://pyd-blog.s3.ap-northeast-2.amazonaws.com/images/${fileName})`,
+                      ),
                     );
                   }
                 } catch (error) {
