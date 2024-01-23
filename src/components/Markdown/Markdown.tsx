@@ -1,37 +1,43 @@
+import useTheme from '@hooks/useTheme';
 import { LayoutWrap } from '@styles/GlobalStyle';
-import { useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { materialLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
 
 const Markdown = ({ title, content }: { title: string; content: string }) => {
+  const { theme } = useTheme();
+
   return (
     <MarkDownstyle>
       <TitleViewer>{title}</TitleViewer>
       <ContentViewer>
         <ReactMarkdown
           children={
-            content
-              .replace(/\n/gi, '\n\n')
-              .replace(/\*\*/gi, '@$_%!^')
-              .replace(/@\$_%!\^/gi, '**')
-              .replace(/<\/?u>/gi, '*') // /u or u => *
+            content.replace(/\n/gi, '\n\n') // 엔터 -> 엔터2번 : 줄 바꾸기
+            // .replace(/\*\*/gi, '@$_%!^')
+            // .replace(/@\$_%!\^/gi, '**')
+            // .replace(/<\/?u>/gi, '*') // /u or u => *
           }
           remarkPlugins={[remarkGfm]}
           components={{
+            // p: ({ children, ...props }) => {
+            //   console.log(children.replace(/\n/, '\n\n'));
+            //   return <p children={children} {...props} />;
+            // },
             h1: props => {
-              return <h1 style={{ fontWeight: 'bold', fontSize: '2.5rem' }} {...props} />;
+              return <h1 style={{ fontSize: '3.2rem', margin: '0.5rem 0' }} {...props} />;
             },
             h2: props => {
-              return <h2 style={{ fontWeight: 'bold', fontSize: '2.0rem' }} {...props} />;
+              return <h2 style={{ fontSize: '2.4rem', margin: '0.5rem 0' }} {...props} />;
             },
             h3: props => {
-              return <h3 style={{ fontWeight: 'bold', fontSize: '1.5rem' }} {...props} />;
+              return <h3 style={{ fontSize: '2.1rem', margin: '0.5rem 0' }} {...props} />;
             },
             h4: props => {
-              return <h4 style={{ fontWeight: 'bold', fontSize: '1.125rem' }} {...props} />;
+              return <h4 style={{ fontSize: '1.8rem', margin: '0.5rem 0' }} {...props} />;
             },
             strong: props => {
               return <strong {...props} />;
@@ -46,42 +52,45 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
               return (
                 <blockquote
                   style={{
-                    background: '#7afca19b',
-                    padding: '1px 15px',
-                    borderRadius: '10px',
+                    width: '100%',
+                    padding: '16px 16px 16px 32px',
+                    margin: '32px 0',
+                    borderLeft: '8px solid #7afca1',
+                    background: 'var(--navigation-color)',
+                    borderRadius: '0 4px 4px 0',
                   }}
                   {...props}
                 />
               );
             },
             a: props => {
-              return <a style={{ color: 'blue' }} {...props} />;
+              return <a style={{ color: '#7afca1' }} {...props} />;
             },
             img: props => {
               return (
-                <img
-                  style={{ maxWidth: '100%' }}
+                <Image
+                  style={{ maxWidth: '100%', margin: '48px 0' }}
                   src={props.alt ? '' : props.src?.replaceAll('%3A', ':')}
                   alt="Image"
+                  width={props.alt && '100%'}
                 />
               );
             },
-            pre: props => <pre style={{ border: '3px solid red' }} {...props} />,
+            pre: props => <pre style={{ width: '100%' }} {...props} />,
             code: props => {
               const match = /language-(\w+)/.exec(props.className || '');
               return match ? (
-                <SyntaxHighlighter style={vscDarkPlus} language={match[1]} PreTag="div">
+                <SyntaxHighlighter
+                  language={match[1]}
+                  PreTag="div"
+                  style={theme === 'dark' ? materialDark : materialLight}
+                >
                   {String(props.children)}
                 </SyntaxHighlighter>
               ) : (
-                <SyntaxHighlighter
-                  style={vscDarkPlus}
-                  background="green"
-                  language="textile"
-                  PreTag="div"
-                >
+                <code style={theme === 'dark' ? materialDark : materialLight}>
                   {String(props.children).replace(/\n$/, '')}
-                </SyntaxHighlighter>
+                </code>
               );
             },
           }}
@@ -92,6 +101,16 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
 };
 
 export default Markdown;
+
+const MarkDownstyle = styled(LayoutWrap)`
+  flex-direction: column;
+  font-size: 1.4rem;
+  max-width: 50%;
+`;
+const Image = styled.img`
+  margin: 3rem 0;
+  max-width: 100%;
+`;
 
 const TitleViewer = styled(LayoutWrap)`
   width: 100%;
@@ -107,31 +126,38 @@ const ContentViewer = styled(LayoutWrap)`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 24px;
-  line-height: 1.7rem;
+  font-size: 1.8rem;
+  line-height: 2rem;
+  word-break: break-word;
   overflow-y: auto;
+
+  p {
+    margin: 18px 0;
+  }
 
   p:has(img) {
     width: 100%;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  pre {
-    width: 100%;
+
+  p > div {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: fit-content;
+    display: inline-block;
   }
 
   pre > div {
-    border-radius: 12px;
+    margin: 0 !important;
+    padding: 0 !important;
     width: 100%;
   }
 
   code {
-    width: 100%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
   }
-`;
-
-const MarkDownstyle = styled(LayoutWrap)`
-  flex-direction: column;
-  font-size: 1.4rem;
 `;
