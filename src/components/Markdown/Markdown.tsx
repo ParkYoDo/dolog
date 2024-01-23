@@ -28,16 +28,36 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
             //   return <p children={children} {...props} />;
             // },
             h1: props => {
-              return <h1 style={{ fontSize: '3.2rem', margin: '0.5rem 0' }} {...props} />;
+              return (
+                <h1
+                  style={{ fontSize: '2.5rem', marginBottom: '1rem', lineHeight: '1.5rem' }}
+                  {...props}
+                />
+              );
             },
             h2: props => {
-              return <h2 style={{ fontSize: '2.4rem', margin: '0.5rem 0' }} {...props} />;
+              return (
+                <h2
+                  style={{ fontSize: '2rem', marginBottom: '1rem', lineHeight: '1.5rem' }}
+                  {...props}
+                />
+              );
             },
             h3: props => {
-              return <h3 style={{ fontSize: '2.1rem', margin: '0.5rem 0' }} {...props} />;
+              return (
+                <h3
+                  style={{ fontSize: '1.5rem', marginBottom: '1rem', lineHeight: '1.5rem' }}
+                  {...props}
+                />
+              );
             },
             h4: props => {
-              return <h4 style={{ fontSize: '1.8rem', margin: '0.5rem 0' }} {...props} />;
+              return (
+                <h4
+                  style={{ fontSize: '1.125rem', marginBottom: '1rem', lineHeight: '1.5rem' }}
+                  {...props}
+                />
+              );
             },
             strong: props => {
               return <strong {...props} />;
@@ -68,7 +88,7 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
             },
             img: props => {
               return (
-                <Image
+                <img
                   style={{ maxWidth: '100%', margin: '48px 0' }}
                   src={props.alt ? '' : props.src?.replaceAll('%3A', ':')}
                   alt="Image"
@@ -88,7 +108,7 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
                   {String(props.children)}
                 </SyntaxHighlighter>
               ) : (
-                <code style={theme === 'dark' ? materialDark : materialLight}>
+                <code style={{ background: 'var(--navigation-color)', padding: '0px 8px' }}>
                   {String(props.children).replace(/\n$/, '')}
                 </code>
               );
@@ -104,12 +124,8 @@ export default Markdown;
 
 const MarkDownstyle = styled(LayoutWrap)`
   flex-direction: column;
-  font-size: 1.4rem;
+  /* font-size: 1.4rem; */
   max-width: 50%;
-`;
-const Image = styled.img`
-  margin: 3rem 0;
-  max-width: 100%;
 `;
 
 const TitleViewer = styled(LayoutWrap)`
@@ -126,38 +142,26 @@ const ContentViewer = styled(LayoutWrap)`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 24px;
-  font-size: 1.8rem;
+  /* font-size: 1.8rem; */
   line-height: 2rem;
   word-break: break-word;
   overflow-y: auto;
 
   p {
     margin: 18px 0;
+
+    &:has(img) {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
-  p:has(img) {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  p > div {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: fit-content;
-    display: inline-block;
-  }
-
+  //SyntaxHighlighter
   pre > div {
     margin: 0 !important;
     padding: 0 !important;
     width: 100%;
-  }
-
-  code {
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
   }
 `;
