@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 const NavigationBar = () => {
   const { theme, onToggleTheme } = useTheme();
-  const { auth } = useAuth();
+  const { auth, onLogout } = useAuth();
   const { onOpenModal } = useModal();
   const navigate = useNavigate();
 
@@ -29,7 +29,13 @@ const NavigationBar = () => {
             >
               Write
             </LayoutWrap>
-            <LayoutWrap width="fit-content" style={{ cursor: 'pointer' }}>
+            <LayoutWrap
+              width="fit-content"
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                onLogout();
+              }}
+            >
               Logout
             </LayoutWrap>
           </>
