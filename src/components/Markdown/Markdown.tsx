@@ -114,7 +114,7 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
                     width: '100%',
                   }}
                 >
-                  {newChildren}
+                  {String(props.children)}
                 </code>
               );
             },
