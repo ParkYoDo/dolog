@@ -96,8 +96,9 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
                 />
               );
             },
-            pre: props => <pre style={{ width: '100%' }} {...props} />,
+            pre: props => <pre style={{ width: '100%', margin: '16px 0' }} {...props} />,
             code: props => {
+              const newChildren = String(props?.children).slice(1)?.replace(/\n\n/gi, '\n');
               const match = /language-(\w+)/.exec(props.className || '');
               return match ? (
                 <SyntaxHighlighter
@@ -105,11 +106,15 @@ const Markdown = ({ title, content }: { title: string; content: string }) => {
                   PreTag="div"
                   style={theme === 'dark' ? materialDark : materialLight}
                 >
-                  {String(props.children)}
+                  {newChildren}
                 </SyntaxHighlighter>
               ) : (
-                <code style={{ background: 'var(--navigation-color)', padding: '0px 8px' }}>
-                  {String(props.children).replace(/\n$/, '')}
+                <code
+                  style={{
+                    width: '100%',
+                  }}
+                >
+                  {newChildren}
                 </code>
               );
             },
@@ -124,7 +129,6 @@ export default Markdown;
 
 const MarkDownstyle = styled(LayoutWrap)`
   flex-direction: column;
-  /* font-size: 1.4rem; */
   max-width: 50%;
 `;
 
@@ -142,7 +146,7 @@ const ContentViewer = styled(LayoutWrap)`
   justify-content: flex-start;
   align-items: flex-start;
   padding: 24px;
-  /* font-size: 1.8rem; */
+  font-size: 1.125rem;
   line-height: 2rem;
   word-break: break-word;
   overflow-y: auto;
@@ -156,12 +160,24 @@ const ContentViewer = styled(LayoutWrap)`
       justify-content: center;
       align-items: center;
     }
+
+    &:has(code) {
+      > code {
+        padding: 2px 8px;
+        border-radius: 4px;
+        background-color: #555555;
+        font-family: 'Poor Story';
+      }
+    }
+  }
+
+  pre {
+    &:has(code) {
+    }
   }
 
   //SyntaxHighlighter
   pre > div {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100%;
+    border-radius: 12px;
   }
 `;
