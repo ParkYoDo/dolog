@@ -71,7 +71,7 @@ const WritePageMenu = styled(LayoutWrap)<{ isShow: boolean }>`
   left: 0;
   right: 0;
   border: 1px solid yellow;
-  transition: transform 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
 
   ${props =>
     props.isShow
