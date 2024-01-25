@@ -3,17 +3,18 @@ import ImageIcon from '@components/Svg/ImageIcon';
 import { IconButton, LayoutWrap } from '@styles/GlobalStyle';
 import axios from 'axios';
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const Write2 = (props: any) => {
+const WriteSlideMenu = (props: any) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { getPresignedUrl } = postApi();
   const [thumnnailImage, setThumbnailImage] = useState('');
 
   console.log(props.thumbnailText);
+  console.log(props.isShow);
 
   return (
-    <LayoutWrap flexDirection="column">
+    <WritePageMenu isShow={props.isShow}>
       <Input
         type="file"
         ref={fileInputRef}
@@ -59,11 +60,32 @@ const Write2 = (props: any) => {
       >
         뒤로가기
       </button>
-    </LayoutWrap>
+    </WritePageMenu>
   );
 };
 
-export default Write2;
+export default WriteSlideMenu;
+
+const WritePageMenu = styled(LayoutWrap)<{ isShow: boolean }>`
+  position: absolute;
+  left: 0;
+  right: 0;
+  border: 1px solid yellow;
+  transition: transform 0.25s ease-in-out;
+
+  ${props =>
+    props.isShow
+      ? css`
+          opacity: 1;
+          background-color: red;
+          transform: translateY(0);
+        `
+      : css`
+          border: 1px solid red;
+          opacity: 0;
+          transform: translateY(100%);
+        `}
+`;
 
 const Input = styled.input`
   width: 100%;
