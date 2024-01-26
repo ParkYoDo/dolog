@@ -147,3 +147,10 @@ export const Button = styled.button`
   border: none;
   cursor: pointer;
 `;
+
+export const Overlay = styled(LayoutWrap)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+`;

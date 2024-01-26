@@ -68,20 +68,17 @@ export default WriteSlideMenu;
 
 const WritePageMenu = styled(LayoutWrap)<{ isShow: boolean }>`
   position: absolute;
-  left: 0;
-  right: 0;
-  border: 1px solid yellow;
-  transition: all 0.25s ease-in-out;
+  background-color: #333333;
+  transition: all 0.5s ease-in-out;
 
   ${props =>
     props.isShow
       ? css`
           opacity: 1;
-          background-color: red;
+
           transform: translateY(0);
         `
       : css`
-          border: 1px solid red;
           opacity: 0;
           transform: translateY(100%);
         `}

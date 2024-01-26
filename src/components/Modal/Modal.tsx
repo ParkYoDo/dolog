@@ -1,38 +1,42 @@
 import * as S from '@components/Modal/ModalStyle';
-import Overlay from '@components/Overlay/Overlay';
 import XmarkIcon from '@components/Svg/XmarkIcon';
 import useModal from '@hooks/useModal';
-import React, { ReactNode, useEffect } from 'react';
+import { Overlay } from '@styles/GlobalStyle';
+import { MouseEvent, ReactNode, useEffect } from 'react';
 
-interface IProps {
+interface IModal {
   width?: string;
   height?: string;
   title: string;
-  content: React.ReactNode;
+  content: ReactNode;
   buttons?: ReactNode[];
 }
 
-const Modal = (props: IProps) => {
+const Modal = (props: IModal) => {
   const { onCloseModal } = useModal();
 
-  // 외부 스크롤 방지
+  const onClickOutside = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) onCloseModal();
+  };
+
+  const onKeyDownEsc = (e: any) => {
+    if (e.key === 'Escape') {
+      onCloseModal();
+      window.removeEventListener('keydown', onKeyDownEsc);
+    }
+  };
+
   useEffect(() => {
     document.body.style.overflow = 'hidden';
-
+    window.addEventListener('keydown', onKeyDownEsc);
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, []);
 
   return (
-    <Overlay>
-      <S.ModalLayout
-        width={props.width || '480px'}
-        height={props.height || 'fit-content'}
-        onKeyDown={e => {
-          if (e.key === 'Escape') onCloseModal();
-        }}
-      >
+    <Overlay onClick={onClickOutside}>
+      <S.ModalLayout width={props.width || '480px'} height={props.height || 'fit-content'}>
         <S.Header>
           {props.title}
           <S.ModalCloseBtn onClick={onCloseModal}>
