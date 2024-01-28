@@ -36,4 +36,24 @@ export const post = {
     const res = await api.post(url, data);
     return res.data;
   },
+
+  uploadPost: async (data: {
+    author: string;
+    title: string;
+    content: string;
+    thumbnailImage: string;
+    thumbnailText: string;
+    url: string;
+  }) => {
+    const res = await api.post(`${PATH.POST.UPLOAD_POST}`, data);
+    return res.data;
+  },
+  getPost: async () => {
+    const res = await api.get(PATH.POST.GET_POST);
+    return res.data;
+  },
+  getOnePost: async (postId: string) => {
+    const res = await api.get(`${PATH.POST.GET_ONE_POST}/${postId}`);
+    return res.data;
+  },
 };

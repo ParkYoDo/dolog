@@ -13,6 +13,9 @@ const PATH = {
 
   POST: {
     PRESIGNED_URL: 'post/presigned-url',
+    UPLOAD_POST: 'post',
+    GET_POST: 'post',
+    GET_ONE_POST: 'post',
   },
 
   MY: {
