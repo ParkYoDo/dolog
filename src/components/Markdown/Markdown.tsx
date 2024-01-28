@@ -7,12 +7,12 @@ import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
 
-const Markdown = ({ title, content }: { title: string; content: string }) => {
+const Markdown = ({ title, content }: { title?: string; content: string }) => {
   const { theme } = useTheme();
 
   return (
     <MarkDownstyle>
-      <TitleViewer>{title}</TitleViewer>
+      {title && <TitleViewer>{title}</TitleViewer>}
       <ContentViewer>
         <ReactMarkdown
           children={
@@ -129,7 +129,6 @@ export default Markdown;
 
 const MarkDownstyle = styled(LayoutWrap)`
   flex-direction: column;
-  max-width: 50%;
 `;
 
 const TitleViewer = styled(LayoutWrap)`
