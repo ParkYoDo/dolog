@@ -42,8 +42,14 @@ const Write = () => {
   };
 
   return (
-    <>
-      <WriteSlideMenu thumbnailText={thumbnailText} url={url} setState={setState} isShow={state} />
+    <LayoutWrap style={{ overflow: 'hidden', contentVisibility: 'auto' }}>
+      <WriteSlideMenu
+        handleSubmit={handleSubmit}
+        thumbnailText={thumbnailText}
+        url={url}
+        setState={setState}
+        isShow={state}
+      />
       <LayoutWrap
         style={{
           overflowY: 'auto',
@@ -121,7 +127,7 @@ const Write = () => {
         </LayoutWrap>
         <Markdown title={watch('title')} content={watch('content')} />
       </LayoutWrap>
-    </>
+    </LayoutWrap>
   );
 };
 

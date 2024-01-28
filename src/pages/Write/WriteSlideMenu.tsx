@@ -1,17 +1,35 @@
 import postApi from '@apis/reactQuery/postApi';
 import ImageIcon from '@components/Svg/ImageIcon';
+import useAuth from '@hooks/useAuth';
 import { IconButton, LayoutWrap } from '@styles/GlobalStyle';
 import axios from 'axios';
 import { useRef, useState } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 import styled, { css } from 'styled-components';
 
 const WriteSlideMenu = (props: any) => {
+  const { auth } = useAuth();
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { getPresignedUrl } = postApi();
-  const [thumnnailImage, setThumbnailImage] = useState('');
+  const [thumbnailImage, setThumbnailImage] = useState('');
 
-  console.log(props.thumbnailText);
-  console.log(props.isShow);
+  const { uploadPost } = postApi();
+
+  const onSubmit: SubmitHandler<{
+    title: string;
+    content: string;
+    thumbnailText: string;
+    url: string;
+  }> = input => {
+    console.log(input);
+    uploadPost.mutate(
+      { ...input, thumbnailImage, author: auth?.uuid },
+      {
+        onSuccess: () => {},
+      },
+    );
+  };
 
   return (
     <WritePageMenu isShow={props.isShow}>
@@ -48,7 +66,7 @@ const WriteSlideMenu = (props: any) => {
         <ImageIcon />
       </IconButton>
       썸네일 이미지
-      <img src={thumnnailImage} alt="not upload" />
+      <img src={thumbnailImage} alt="not upload" width="360px" height="180px" />
       썸네일 텍스트
       <input {...props.thumbnailText} />
       Post Url
@@ -60,6 +78,7 @@ const WriteSlideMenu = (props: any) => {
       >
         뒤로가기
       </button>
+      <button onClick={props?.handleSubmit(onSubmit)}>제출</button>
     </WritePageMenu>
   );
 };
@@ -68,6 +87,7 @@ export default WriteSlideMenu;
 
 const WritePageMenu = styled(LayoutWrap)<{ isShow: boolean }>`
   position: absolute;
+  flex-direction: column;
   background-color: #333333;
   transition: all 0.5s ease-in-out;
 
