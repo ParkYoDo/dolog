@@ -1,6 +1,7 @@
 import postApi from '@apis/reactQuery/postApi';
 import { LayoutWrap } from '@styles/GlobalStyle';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,30 +12,38 @@ const Home = () => {
       style={{
         overflowY: 'auto',
         flexWrap: 'wrap',
+        gap: '24px',
       }}
     >
       {getPost.data?.map((el: any) => (
-        <div
-          style={{
-            width: 'fit-content',
-            height: 'fit-content',
-            cursor: 'pointer',
-            border: '1px solid white',
-            padding: '12px',
-            borderRadius: '12px',
-          }}
+        <Post
           onClick={() => {
             navigate(`post/${el.url}`);
           }}
         >
           <div>{el.title}</div>
-          <img src={el.thumbnailImage} alt="image" width="360px" height="180px" />
-          <div>{el.thumbnailText}</div>
+          {el.thumbnailImage ? (
+            <img src={el.thumbnailImage} alt="image" width="360px" height="180px" />
+          ) : (
+            <div style={{ width: '360px', height: '180px' }} />
+          )}
+          {/* <div>{el.thumbnailText}</div> */}
           <div>{el.createdAt}</div>
-        </div>
+        </Post>
       ))}
     </LayoutWrap>
   );
 };
+
+const Post = styled.div`
+  border: 1px solid white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.25s ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+`;
 
 export default Home;
