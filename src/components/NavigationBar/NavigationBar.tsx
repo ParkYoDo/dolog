@@ -16,7 +16,7 @@ const NavigationBar = () => {
 
   return (
     <S.NavigationBar>
-      <S.NavLink to="/">Blog</S.NavLink>
+      <S.NavLink to="/">Dolog</S.NavLink>
       <S.NavMenus>
         <ToggleSwitch onClick={onToggleTheme} checked={theme === 'dark'} />
 
